@@ -1,0 +1,30 @@
+- name: Data Manipulation
+  hosts: servers
+  gather_facts: true
+  vars:
+   my_name: devops-expert
+  tasks:
+  - name: Print message
+    debug:
+      msg: "My name is {{ my_name }}"
+    notify: Handler_No1
+  - name: Print message in loop
+    debug:
+      msg: "My name is {{ item }}"
+    loop:
+      - name-1
+      - name-2
+  - name: Conditional fact
+    debug:
+      msg: "{{ ansible_os_family }}"
+#    changed_when: True
+    when: ansible_os_family == 'Debian'
+    notify: Handler_No1
+  - name: Ansible fact - ansible_date_time.iso8601
+    debug:
+     msg: "Timestamp in the ISO8601 format: {{ ansible_date_time.iso8601 }}"
+
+  handlers:
+  - name: Handler_No1
+    debug:
+      msg: "Message from Handler Number 1"

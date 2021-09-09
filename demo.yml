@@ -1,0 +1,35 @@
+---
+- hosts: servers
+  handlers:
+
+  - name: Handler_No1
+    debug:
+      msg: "Message from Handler Number 1"
+
+  tasks:
+
+  - name: Add User
+    user:
+      name: devexpert # cat /etc/passwd
+      comment: "Devops expert"
+      shell: /bin/bash
+    notify: Handler_No1
+
+  - name: Register statement
+    shell: sdfsdfsdfsdf
+    register: result
+    ignore_errors: True
+
+  - name: Print return information from the previous task
+    debug:
+      var: result
+#      verbosity: 2
+
+  - name: If statement - Running on register command failure
+    user:
+      name: devexpert2
+      comment: "The Tager"
+      shell: /bin/bash
+    when: result.rc == 127
+
+      

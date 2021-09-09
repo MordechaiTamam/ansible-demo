@@ -1,0 +1,8 @@
+- hosts: node1
+
+  vars:
+    java_packages:
+      - openjdk-8-jdk
+
+  roles:
+    - role: geerlingguy.jenkins

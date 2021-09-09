@@ -1,6 +1,5 @@
 #!/bin/bash
 docker rm -f ansible_node1  ansible_node2
-#docker build -t aviel/ansible-demo .
 docker run -d -P --name ansible_node1 moditamam/ansible-demo
 docker run -d -P --name ansible_node2 moditamam/ansible-demo
 IP_ADDR=localhost

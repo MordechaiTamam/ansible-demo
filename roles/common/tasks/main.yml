@@ -1,0 +1,6 @@
+--- 
+- name: install nginx and vim
+  apt: name=nginx,vim state=present
+
+- name: Copy devops-experts.txt
+  copy: src=devops-experts.txt dest=/var/tmp

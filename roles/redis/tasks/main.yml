@@ -1,0 +1,16 @@
+- name: install redis on Debian based distros
+  apt:
+    name: redis-server
+    state: present
+    update_cache: true
+  when: ansible_os_family == 'Debian'
+
+- name: install redis on RHEL based distros
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - epel-release
+    - redis
+  when: ansible_os_family == 'RedHat'

@@ -1,0 +1,11 @@
+ssh-copy-id -p <PORT> localhost
+password: screencast
+
+# ssh into the container:
+ssh -p <PORT> localhost
+
+# First Ansible command:
+ansible servers -m ping
+
+# Apply an Ansible module on one of the servers:
+ansible -i hosts all -m ping --limit node2

@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+  - name: check out a git repository
+    local_action:
+      module: git
+      repo: git@github.com:MordechaiTamam/ansible-demo.git
+      dest: /tmp/ansible-demo
+
+  - name: list
+    local_action:
+      module: shell
+      _raw_params: "ls -ltr"
+    register: output
+  - name: debug
+    debug:
+      var: output

@@ -7,9 +7,6 @@ IP_ADDR=localhost
 NODE1=`docker port ansible_node1 22 | awk -F ':' '{print $2}'`
 NODE2=`docker port ansible_node2 22 | awk -F ':' '{print $2}'`
 
-sshpass -p screencast ssh-copy-id -p $NODE1 localhost
-sshpass -p screencast ssh-copy-id -p $NODE2 localhost
-
 apt-get update && apt-get install ansible vim -y
 > hosts
 echo '[servers]'  >> hosts

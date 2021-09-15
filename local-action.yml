@@ -11,6 +11,7 @@
       module: shell
       _raw_params: "ls -ltr"
     register: output
+
   - name: debug
     debug:
       var: output

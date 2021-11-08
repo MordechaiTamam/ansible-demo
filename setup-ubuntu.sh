@@ -1,15 +1,18 @@
 #!/bin/bash
 docker rm -f ansible_node1  ansible_node2
-docker run -d -P --name ansible_node1 moditamam/ansible-demo
-docker run -d -P --name ansible_node2 moditamam/ansible-demo
-IP_ADDR=localhost
+docker run -d -p 1022:22 --name ansible_node1 moditamam/ansible-demo
+docker run -d -p 1023:22 --name ansible_node2 moditamam/ansible-demo
+
 NODE1=`docker port ansible_node1 22 | awk -F ':' '{print $2}'`
+sshpass -p screencast ssh-copy-id -p $NODE1 root@localhost
+echo "succeeded node1..."
+
 NODE2=`docker port ansible_node2 22 | awk -F ':' '{print $2}'`
+sshpass -p screencast ssh-copy-id -p $NODE2 root@localhost
+echo "succeeded node2..."
+#
 
-sshpass -p screencast ssh-copy-id -p $NODE1 localhost
-sshpass -p screencast ssh-copy-id -p $NODE2 localhost
-
-apt-get update && apt-get install ansible vim -y
+IP_ADDR=localhost
 > hosts
 echo '[servers]'  >> hosts
 echo "node1 ansible_host=$IP_ADDR ansible_port=$NODE1" >> hosts

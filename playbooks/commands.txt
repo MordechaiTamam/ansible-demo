@@ -1,0 +1,7 @@
+ansible-playbook playbooks/list.yaml
+
+# Setting some webservers and load balancer infront of them:
+ansible-playbook playbooks/webserver.yml
+ansible-playbook playbooks/loadbalancer.yml
+
+curl http://localhost:8080/

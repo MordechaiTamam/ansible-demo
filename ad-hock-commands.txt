@@ -1,0 +1,15 @@
+# Run a command on a list of hosts (only localhost in this case)
+ansible all -i "localhost," -c local -m shell -a 'echo hello world'
+
+# module named ping, run it on the 'servers' group.
+ansible -i hosts servers -m ping
+ansible -i hosts servers -m ansible.builtin.package_facts --limit node1
+
+# Installing a package named nginx on all the servers in the group
+ansible -i hosts servers -m apt -a "name=nginx state=present"
+# Verify that the package was installed
+ansible -i hosts servers -m ansible.builtin.package_facts --limit node1 | grep nginx
+
+# Copy a file from the Ansible controller to the targets:
+ansible -i hosts all -m copy -a "src=/home/modi/dev/ansible-demo/setup-ubuntu.sh dest=/tmp/testfile" -vvv
+ansible -i hosts all -m shell -a "ls -l /tmp/" --limit node1

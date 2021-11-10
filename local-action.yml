@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+    - name: checkout a git repository
+      local_action:
+        module: git
+        repo: git@github.com:MordechaiTamam/monitoring-demo.git
+        dest: /tmp/111021
+      when ansible_facts["os_name"] == "RedHat"
+    - name: list
+      local_action:
+        module: shell
+        _raw_params: "ls -ltr /tmp/111021"
+      register: output
+    - name: debug
+      debug:
+        var: output

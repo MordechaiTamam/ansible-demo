@@ -4,7 +4,7 @@ IP_ADDR=localhost
 
 docker network create ansible-demo
 docker rm -f ansible_node1  ansible_node2 ansible_node3
-docker run -d -p 1022:22 --network ansible-demo --name ansible_node1 moditamam/ansible-demo
+docker run -d -p 1022:22 --network ansible-demo -p 8081:8080 --name ansible_node1 moditamam/ansible-demo
 docker run -d -p 1023:22 --network ansible-demo --name ansible_node2 moditamam/ansible-demo
 docker run -d -p 1024:22 --network ansible-demo -p 8080:80 --name ansible_node3 moditamam/ansible-demo
 

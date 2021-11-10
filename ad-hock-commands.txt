@@ -11,5 +11,5 @@ ansible -i hosts servers -m apt -a "name=nginx state=present"
 ansible -i hosts servers -m ansible.builtin.package_facts --limit node1 | grep nginx
 
 # Copy a file from the Ansible controller to the targets:
-ansible -i hosts all -m copy -a "src=/home/modi/dev/ansible-demo/setup-ubuntu.sh dest=/tmp/testfile" -vvv
+ansible -i hosts group1 -m copy -a "src=/home/modi/dev/ansible-demo/setup-ubuntu.sh dest=/tmp/testfile" -vvv
 ansible -i hosts all -m shell -a "ls -l /tmp/" --limit node1

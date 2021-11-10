@@ -8,7 +8,7 @@
     name: python3.7
     state: present
     install_recommends: yes
-  notify: Handler_No1
+  notify: install_Handler_No1
 
 - name: Remove python3.7
   apt:
@@ -17,4 +17,4 @@
     state: absent
     install_recommends: yes
     autoremove: true
-  notify: Handler_No1
+  notify: install_Handler_No1

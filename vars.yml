@@ -1,5 +1,5 @@
 ---
-- hosts: servers
+- hosts: [node1,]
 
   vars:
   - var1: "Modi"

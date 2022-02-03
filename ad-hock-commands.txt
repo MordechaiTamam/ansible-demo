@@ -12,5 +12,5 @@ ansible -i hosts servers -m ansible.builtin.package_facts --limit node1 | grep n
 
 # Copy a file from the Ansible controller to the targets:
 ansible group1 -m copy -a "src=/home/modi/dev/ansible-demo/setup-ubuntu.sh dest=/tmp/testfile"
-ansible group1 all -m shell -a "ls -l /tmp/"
-ansible group1 all -m shell -a "cat /tmp/testfile"
+ansible group1 -m shell -a "ls -l /tmp/"
+ansible group1 -m shell -a "cat /tmp/testfile"

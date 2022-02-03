@@ -1,13 +1,18 @@
 #!/bin/bash
-#set -ex
+set -e
+sudo apt install sshpass -y
+sudo apt install ansible
+
 IP_ADDR=localhost
 
-docker network create ansible-demo
 docker rm -f ansible_node1  ansible_node2 ansible_node3
+docker network rm ansible-demo
+
+docker network create ansible-demo
 docker run -d -p 1022:22 --network ansible-demo -p 8081:8080 --name ansible_node1 moditamam/ansible-demo
 docker run -d -p 1023:22 --network ansible-demo --name ansible_node2 moditamam/ansible-demo
 docker run -d -p 1024:22 --network ansible-demo -p 8080:80 --name ansible_node3 moditamam/ansible-demo
-
+sleep 30
 # Dynamicaly extracting the the containers ports
 
 #ssh-keygen -f "/home/modi/.ssh/known_hosts" -R "[localhost]"
@@ -49,6 +54,6 @@ FolderLocation=`pwd`
 echo $FolderLocation
 > Instances
 echo "----------------------------" >> Instances
-echo -e "- Ansible Port is $SERVER_PORT \n- Node 1 Port is $NODE1\n- Node 2 Port is $NODE2" >> Instances
+echo -e "- Ansible Port is $SERVER_PORT \n- Node 1 Port is $NODE1\n- Node 2 Port is $NODE2\n- Node 3 Port is $NODE3" >> Instances
 echo "----------------------------" >> Instances
 cat Instances

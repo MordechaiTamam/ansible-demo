@@ -1,7 +1,7 @@
 - hosts: loadbalancer
   become: true
   tasks:
-  - name: install nginx
+  - name: install-python nginx
     apt:
       name=nginx
       state=present

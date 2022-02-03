@@ -2,5 +2,5 @@
 - hosts: [node2]
 
   roles:
-    - install
+    - install-python
     - common

@@ -1,0 +1,11 @@
+[controller]
+control ansible_connection=local
+[servers]
+node1 ansible_host=localhost ansible_port=1022 ansible_user=root
+node2 ansible_host=localhost ansible_port=1023 ansible_user=root
+[group1]
+node1 ansible_host=localhost ansible_port=1022 ansible_user=root
+[group2]
+node2 ansible_host=localhost ansible_port=1023 ansible_user=root
+[loadbalancer]
+lb01 ansible_host=localhost ansible_port=1024 ansible_user=root

@@ -1,12 +1,11 @@
 - hosts: servers
   become: true
   tasks:
-  - name: install-python apache
+  - name: install apache
     apt: name=apache2 state=present update_cache=yes
   - name: deleted index.html
     file: path=/var/www/html/index.html state=absent
     notify: restart apache2
-
   handlers:
   - name: restart apache2
     service: name=apache2 state=restarted

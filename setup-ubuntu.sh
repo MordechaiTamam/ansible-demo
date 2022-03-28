@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 sudo apt install sshpass -y
 sudo apt install ansible
 
@@ -12,7 +12,7 @@ docker network create ansible-demo
 docker run -d -p 1022:22 --network ansible-demo -p 8081:8080 --name ansible_node1 moditamam/ansible-demo
 docker run -d -p 1023:22 --network ansible-demo --name ansible_node2 moditamam/ansible-demo
 docker run -d -p 1024:22 --network ansible-demo -p 8080:80 --name ansible_node3 moditamam/ansible-demo
-sleep 30
+
 # Dynamicaly extracting the the containers ports
 
 #ssh-keygen -f "/home/modi/.ssh/known_hosts" -R "[localhost]"
@@ -21,16 +21,13 @@ sleep 30
 #ssh uses direct TTY access to make sure that the password is indeed issued by an interactive keyboard user.
 # Sshpass runs ssh in a dedicated tty, fooling it into thinking it is getting the password from an interactive user.
 NODE1=`docker port ansible_node1 22 | awk -F ':' '{print $2}'`
-sshpass -p screencast ssh-copy-id -p $NODE1 root@localhost
-echo "succeeded node1..."
+echo "succeeded node1..." $NODE1
 
 NODE2=`docker port ansible_node2 22 | awk -F ':' '{print $2}'`
-sshpass -p screencast ssh-copy-id -p $NODE2 root@localhost
-echo "succeeded node2..."
+echo "succeeded node2..." $NODE2
 #
 NODE3=`docker port ansible_node3 22 | awk -F ':' '{print $2}'`
-sshpass -p screencast ssh-copy-id -p $NODE3 root@localhost
-echo "succeeded node3..."
+echo "succeeded node3..." $NODE3
 
 > hosts
 echo '[controller]' >> hosts
@@ -56,4 +53,7 @@ echo $FolderLocation
 echo "----------------------------" >> Instances
 echo -e "- Ansible Port is $SERVER_PORT \n- Node 1 Port is $NODE1\n- Node 2 Port is $NODE2\n- Node 3 Port is $NODE3" >> Instances
 echo "----------------------------" >> Instances
+
+echo -e "- ssh-copy-id -p $NODE1 root@localhost \n- ssh-copy-id -p $NODE2 root@localhost\n- ssh-copy-id -p $NODE3 root@localhost\n"
+echo "password: screencast"
 cat Instances

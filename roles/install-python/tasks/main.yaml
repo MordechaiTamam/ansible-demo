@@ -2,18 +2,18 @@
   apt_repository:
     repo: ppa:deadsnakes/ppa
 
-- name: Install latest version of "python3.7"
+- name: Install latest version of "python3.9"
   apt:
     update_cache: yes
-    name: python3.7
+    name: python3.9
     state: present
     install_recommends: yes
   notify: install_Handler_No1
 
-- name: Remove python3.7
+- name: Remove python3.9
   apt:
     update_cache: yes
-    name: python3.7
+    name: python3.9
     state: absent
     install_recommends: yes
     autoremove: true
